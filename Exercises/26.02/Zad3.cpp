@@ -16,6 +16,7 @@ bool way(char M[20][20], int sizeX, int sizeY, int x, int y, char* word, char* c
     if (way(M,sizeX,sizeY,x-1,y+1,word,cur_word)) { return 1; }
     if (way(M,sizeX,sizeY,x-1,y-1,word,cur_word)) { return 1; }
     cur_word[l] = '\0';
+    return 0;
 }
 
 
