@@ -47,7 +47,8 @@ int main()
         {
             if(M[i][j]==word[0])
             {
-                flag = flag || way(M,sizeY,sizeX,i,j,word,junk);
+                junk[0]='\0';
+                flag = flag || way(M,sizeX,sizeY,j,i,word,junk);
             }
         }
     }
