@@ -19,22 +19,18 @@ class Human
 
 };
 
-Human::Human(char* n)
+Human::Human(char* n) : name(NULL)
 {
-    name = new char[strlen(n)+1];
-    assert(name!=NULL);
-    strcpy(name,n);
+    SetName(n);
 }
 
 Human::Human(const Human& other)
 {
     if(other.name!=NULL)
     {
-        name = new char[strlen(other.name)+1];
-        assert(name!=NULL);
-        strcpy(name,other.name);
+        SetName(other.name);
     }
-    else name =NULL;
+    else name = NULL;
 }
 
 const char* Human::GetName() const
