@@ -21,16 +21,18 @@ class Human
 
 Human::Human(char* n) : name(NULL)
 {
-    SetName(n);
+    if(n!=NULL)
+    {
+        SetName(n);
+    }
 }
 
-Human::Human(const Human& other)
+Human::Human(const Human& other) : name(NULL)
 {
     if(other.name!=NULL)
     {
-        SetName(other.name);
+       SetName(other.name);
     }
-    else name = NULL;
 }
 
 const char* Human::GetName() const
@@ -40,14 +42,17 @@ const char* Human::GetName() const
 
 void Human::SetName(char* n)
 {
+    if(name!=NULL) { delete [] name; }
     name = new char[strlen(n)+1];
     assert(name!=NULL);
-    strcpy(name,n);    
+    strcpy(name,n);
 }
 
 int main()
 {
-    Human A("AAA"),B(A);
-    cout<<A.GetName()<<endl<<B.GetName()<<endl;
+    Human A("AAA"),C("CCC"),B;
+    B.SetName("Q");
+    B.SetName("BBB");
+    cout<<A.GetName()<<endl<<B.GetName()<<endl<<C.GetName();
     return 0;
 }
