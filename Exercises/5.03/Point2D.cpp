@@ -10,6 +10,7 @@ class Point2D
     public:
         Point2D() { X=0; Y=0;} // konstruktor po podrazbirane
         Point2D (double, double);
+        Point2D (const Point2D& p) { X=p.X; Y=p.Y; }
         void SetX(double);
         void SetY(double);
         double GetX() const;
@@ -47,10 +48,12 @@ void Point2D::print() const
     cout<<X<<" "<<Y<<endl;
 }
 
+
 int main()
 {
-    Point2D A,B(1,2);
+    Point2D A,B(1,2),C(B);
     A.print();
     B.print();
+    C.print();
     return 0;
 }
