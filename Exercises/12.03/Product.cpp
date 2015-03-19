@@ -6,18 +6,18 @@ Product::Product(char* n, int q, double p) : name(NULL)
 {
     if(n!=NULL)
     {
-        SetName(n);
-        SetPrice(p);
-        SetQuantity(q);
+        setName(n);
+        setPrice(p);
+        setQuantity(q);
     }
 }
 Product::Product(const Product& other) : name(NULL)
 {
     if(other.name!=NULL)
     {
-        SetName(other.name);
-        SetPrice(other.price);
-        SetQuantity(other.quantity);
+        setName(other.name);
+        setPrice(other.price);
+        setQuantity(other.quantity);
     }
 }
 Product::~Product()
@@ -39,7 +39,7 @@ double Product::getPrice() const
 {
     return price;
 }
-void Product::SetName(char* n)
+void Product::setName(char* n)
 {
     if(name!=NULL)
     {
@@ -49,14 +49,14 @@ void Product::SetName(char* n)
     assert(name!=NULL);
     strcpy(name,n);
 }
-void Product::SetQuantity(int q)
+void Product::setQuantity(int q)
 {
     if(q>=0)
     {
         quantity = q;
     }
 }
-void Product::SetPrice(double p)
+void Product::setPrice(double p)
 {
     if(p>=0)
     {
@@ -68,9 +68,9 @@ Product& Product::operator=(const Product& other)
 {
     if(this != &other)
     {
-        SetName(other.name);
-        SetPrice(other.price);
-        SetQuantity(other.quantity);
+        setName(other.name);
+        setPrice(other.price);
+        setQuantity(other.quantity);
     }
     return *this;
 }
