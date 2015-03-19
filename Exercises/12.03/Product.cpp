@@ -1,16 +1,16 @@
 #include "Product.h"
 
-Product::Product(char* n,int q, double p) : name(NULL)
+Product::Product() : name(NULL), quantity(0), price(0){}
+
+Product::Product(char* n, int q, double p) : name(NULL)
 {
     if(n!=NULL)
     {
         SetName(n);
         SetPrice(p);
         SetQuantity(q);
-
     }
 }
-
 Product::Product(const Product& other) : name(NULL)
 {
     if(other.name!=NULL)
@@ -20,30 +20,35 @@ Product::Product(const Product& other) : name(NULL)
         SetQuantity(other.quantity);
     }
 }
-
-const char* Product::GetName() const
+Product::~Product()
+{
+    if(name!=NULL)
+    {
+        delete [] name;
+    }
+}
+const char* Product::getName() const
 {
     return name;
 }
-
-int Product::GetQuantity() const
+int Product::getQuantity() const
 {
     return quantity;
 }
-
-double Product::GetPrice() const
+double Product::getPrice() const
 {
     return price;
 }
-
 void Product::SetName(char* n)
 {
-    if(name!=NULL) { delete [] name; }
+    if(name!=NULL)
+    {
+        delete[] name;
+    }
     name = new char[strlen(n)+1];
     assert(name!=NULL);
     strcpy(name,n);
 }
-
 void Product::SetQuantity(int q)
 {
     if(q>=0)
@@ -51,7 +56,6 @@ void Product::SetQuantity(int q)
         quantity = q;
     }
 }
-
 void Product::SetPrice(double p)
 {
     if(p>=0)
@@ -60,8 +64,10 @@ void Product::SetPrice(double p)
     }
 }
 
-Product& Product::operator=(const Product& other){
-    if(this != &other){
+Product& Product::operator=(const Product& other)
+{
+    if(this != &other)
+    {
         SetName(other.name);
         SetPrice(other.price);
         SetQuantity(other.quantity);
