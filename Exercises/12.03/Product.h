@@ -24,6 +24,7 @@ class Product
         void SetName(char*);
         void SetQuantity(int);
         void SetPrice(double);
+        Product& operator= (const Product& other);
 };
 
 
