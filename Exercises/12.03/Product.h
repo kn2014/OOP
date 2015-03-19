@@ -18,9 +18,9 @@ public :
     double getPrice() const;
     int getQuantity() const;
     const char* getName() const;
-    void SetName(char*);
-    void SetQuantity(int);
-    void SetPrice(double);
+    void setName(char*);
+    void setQuantity(int);
+    void setPrice(double);
     Product& operator= (const Product& other);
 
 };
