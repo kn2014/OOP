@@ -59,3 +59,12 @@ void Product::SetPrice(double p)
         price = p;
     }
 }
+
+Product& Product::operator=(const Product& other){
+    if(this != &other){
+        SetName(other.name);
+        SetPrice(other.price);
+        SetQuantity(other.quantity);
+    }
+    return *this;
+}
