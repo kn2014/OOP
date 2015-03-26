@@ -6,6 +6,7 @@
 #include "Product.h"
 #include <stdlib.h>
 
+
 class Store
 {
 public:
@@ -19,11 +20,19 @@ public:
     void setElementAt(int  i, const Product& other);
     void addElement(const Product& other);
     void removeElementFrom(int i);
+    void sortByName();
+    void sortByPrice();
+    void print();
+    const Product** ptrSortByName();
+    const Product** ptrSortByPrice();
 
 private:
     Product* products;
+    const Product** ptrs;
     int maxSize;
     int size;
+    void sorter(bool (*func) (const Product&, const Product&));
 };
 
 #endif
+
