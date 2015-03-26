@@ -2,7 +2,9 @@
 
 Store::Store(int _maxSize) : products(NULL), size(0), maxSize(_maxSize){
     products = new Product[maxSize];
+    ptrs = new const Product*[maxSize];
     assert(products != NULL);
+    assert(ptrs != NULL);
 }
 
 Store::Store(const Store& other) : size (other.size), maxSize (other.maxSize), products(NULL)
@@ -10,11 +12,13 @@ Store::Store(const Store& other) : size (other.size), maxSize (other.maxSize), p
     if (other.size != 0)
     {
         products = new Product[other.maxSize];
+        ptrs = new const Product*[other.maxSize];
         assert(products != NULL);
 
         for(int i = 0; i<size; i++)
         {
             products[i] = other.products[i];
+            ptrs[i] = &products[i] ;
         }
     }
 }
@@ -22,7 +26,12 @@ Store::Store(const Store& other) : size (other.size), maxSize (other.maxSize), p
 Store::~Store()
 {
     if(products != NULL)
+    {
         delete[] products;
+        delete[] ptrs;
+    }
+
+
 }
 
 bool Store::full()const
@@ -74,6 +83,7 @@ void Store::addElement(const Product& other)
         exit(1);
     }
     products[size] = other;
+    ptrs[size]  = &products[size];
     size++;
 }
 
@@ -90,3 +100,69 @@ void Store::removeElementFrom(int i)
     }
     size--;
 }
+
+void Store::sorter(bool (*func) (const Product&, const Product&)){
+    for(int i = 0; i<size-1; i++){
+        for(int j = i+1; j < size ; j++){
+            if(func(products[i], products[j])){
+                swap(products[i], products[j]);
+            }
+        }
+    }
+}
+
+bool cmpByName(const Product& p1, const Product& p2)
+{
+    return (strcmp(p1.getName(),p2.getName()))>0;
+}
+
+bool cmpByPrice(const Product& p1, const Product& p2)
+{
+    return p1.getPrice() > p2.getPrice();
+}
+
+void Store::sortByName()
+{
+    sorter(cmpByName);
+}
+
+void Store::sortByPrice(){
+    sorter(cmpByPrice);
+}
+
+void Store::print()
+{
+    for(int i=0;i<size;i++)
+    {
+        cout<<ptrs[i]->getName()<<" "<<ptrs[i]->getPrice()<<" "<<ptrs[i]->getQuantity()<<endl;
+    }
+}
+
+const Product** Store::ptrSortByName(){
+    const Product *temp;
+    for(int i = 0; i<size-1; i++){
+        for(int j = i+1; j < size ; j++){
+            if(strcmp(ptrs[i]->getName(), ptrs[j]->getName())>0){
+                temp = ptrs[i];
+                ptrs[i] = ptrs[j];
+                ptrs[j] = temp;
+            }
+        }
+    }
+    return ptrs;
+}
+
+const Product** Store::ptrSortByPrice(){
+    const Product *temp;
+    for(int i = 0; i<size-1; i++){
+        for(int j = i+1; j < size ; j++){
+            if(ptrs[i]->getPrice()>ptrs[j]->getPrice()){
+                temp = ptrs[i];
+                ptrs[i] = ptrs[j];
+                ptrs[j] = temp;
+            }
+        }
+    }
+    return ptrs;
+}
+
