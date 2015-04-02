@@ -21,7 +21,7 @@ class Fraction
         Fraction operator*(const Fraction&)const;
         Fraction operator/(const Fraction&)const;
         bool operator==(const Fraction&)const;
-        bool operator>(const Fraction&)const;
+        bool operator>=(const Fraction&)const;
         bool operator<(const Fraction&)const;
         friend Fraction operator+(const int&,const Fraction&);
 
