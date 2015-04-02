@@ -101,7 +101,7 @@ bool Fraction::operator<(const Fraction& other) const{
     return num * other.den < den * other.num;
 }
 
-bool Fraction::operator>(const Fraction& other) const{
+bool Fraction::operator>=(const Fraction& other) const{
     return !(*this<other);
 }
 
