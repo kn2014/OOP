@@ -23,7 +23,7 @@ void Fraction::skr()
     den = den/k;
 }
 
-Fraction::Fraction(int n=0,int d=1 )
+Fraction::Fraction(int n,int d )
 {
     num = n;
     den = d;
@@ -104,4 +104,13 @@ bool Fraction::operator<(const Fraction& other) const{
 bool Fraction::operator>(const Fraction& other) const{
     return !(*this<other);
 }
+
+Fraction operator+(const int& i, const Fraction& fr){
+    Fraction result;
+    result.den = fr.den;
+    result.num = i * fr.den + fr.num;
+    result.skr();
+    return result;
+}
+
 
