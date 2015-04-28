@@ -221,13 +221,10 @@ Store Store::operator+ (const Product& other)const{
 }
 
 Store Store::operator+ (const Store& other)const{
-     Store result;
+     Store result(maxSize + other.maxSize);
 
     if(&other != NULL){
-        result.maxSize = maxSize + other.maxSize;
         result.size = size + other.size;
-        result.products = new Product[result.maxSize];
-        result.ptrs = new const Product*[result.maxSize];
         int i;
         for(i = 0; i<size; i++){
             result.products[i] = products[i];
