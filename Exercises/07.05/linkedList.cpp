@@ -68,15 +68,15 @@ public:
         {
             current = first;
             int i = 0;
-            while(i<where-1)
+            while(i<where)
             {
                 if(current->link==NULL) { cout<<"Error";}
                 else { current = current->link; }
                 i++;
             }
-            node<T>* temp = current->link;
+            node<T>* temp = current;
             T result = temp->inf;
-            current->link = current->link->link;
+            current = current->link;
             delete temp;
             size--;
             return result;
