@@ -68,15 +68,15 @@ public:
         {
             current = first;
             int i = 0;
-            while(i<where)
+            while(i<where-1)
             {
                 if(current->link==NULL) { cout<<"Error";}
                 else { current = current->link; }
                 i++;
             }
-            node<T>* temp = current;
+            node<T>* temp = current->link;
             T result = temp->inf;
-            current = current->link;
+            current->link = current->link->link;
             delete temp;
             size--;
             return result;
@@ -113,7 +113,7 @@ int main()
     l.addElementAt(2,1);
     l.addElementAt(3,2);
 
-    cout<<l.elementAt(0)<<endl;
+    cout<<l.removeFrom(1)<<endl<<endl;
 
     l.print();
     return 0;
