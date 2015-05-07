@@ -23,7 +23,7 @@ public:
 
     void push(const T what)
     {
-        if(size<current){
+        if(size>current){
             arr[current] = what;
             current++;
         } else {
