@@ -11,6 +11,7 @@ Product::Product(char* n, int q, double p) : name(NULL)
         setQuantity(q);
     }
 }
+
 Product::Product(const Product& other) : name(NULL)
 {
     if(other.name!=NULL)
@@ -35,6 +36,7 @@ int Product::getQuantity() const
 {
     return quantity;
 }
+
 double Product::getPrice() const
 {
     return price;
@@ -66,6 +68,7 @@ void Product::setPrice(double p)
 
 Product& Product::operator=(const Product& other)
 {
+
     if(this != &other)
     {
         setName(other.name);
@@ -74,3 +77,4 @@ Product& Product::operator=(const Product& other)
     }
     return *this;
 }
+
