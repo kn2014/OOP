@@ -1,6 +1,7 @@
 #include "Store.h"
 
-Store::Store(int _maxSize) : products(NULL), size(0), maxSize(_maxSize){
+Store::Store(int _maxSize) : products(NULL), size(0), maxSize(_maxSize)
+{
     products = new Product[maxSize];
     ptrs = new const Product*[maxSize];
     assert(products != NULL);
@@ -9,12 +10,12 @@ Store::Store(int _maxSize) : products(NULL), size(0), maxSize(_maxSize){
 
 Store::Store(const Store& other) : size (other.size), maxSize (other.maxSize), products(NULL)
 {
+    products = new Product[other.maxSize];
+    ptrs = new const Product*[other.maxSize];
+    assert(products != NULL);
+
     if (other.size != 0)
     {
-        products = new Product[other.maxSize];
-        ptrs = new const Product*[other.maxSize];
-        assert(products != NULL);
-
         for(int i = 0; i<size; i++)
         {
             products[i] = other.products[i];
@@ -101,10 +102,14 @@ void Store::removeElementFrom(int i)
     size--;
 }
 
-void Store::sorter(bool (*func) (const Product&, const Product&)){
-    for(int i = 0; i<size-1; i++){
-        for(int j = i+1; j < size ; j++){
-            if(func(*ptrs[i], *ptrs[j])){
+void Store::sorter(bool (*func) (const Product&, const Product&))
+{
+    for(int i = 0; i<size-1; i++)
+    {
+        for(int j = i+1; j < size ; j++)
+        {
+            if(func(*ptrs[i], *ptrs[j]))
+            {
                 swap(ptrs[i], ptrs[j]);
             }
         }
@@ -126,23 +131,28 @@ void Store::sortByName()
     sorter(cmpByName);
 }
 
-void Store::sortByPrice(){
+void Store::sortByPrice()
+{
     sorter(cmpByPrice);
 }
 
 void Store::print()
 {
-    for(int i=0;i<size;i++)
+    for(int i=0; i<size; i++)
     {
         cout<<ptrs[i]->getName()<<" "<<ptrs[i]->getPrice()<<" "<<ptrs[i]->getQuantity()<<endl;
     }
 }
 
-const Product** Store::ptrSortByName(){
+const Product** Store::ptrSortByName()
+{
     const Product *temp;
-    for(int i = 0; i<size-1; i++){
-        for(int j = i+1; j < size ; j++){
-            if(strcmp(ptrs[i]->getName(), ptrs[j]->getName())>0){
+    for(int i = 0; i<size-1; i++)
+    {
+        for(int j = i+1; j < size ; j++)
+        {
+            if(strcmp(ptrs[i]->getName(), ptrs[j]->getName())>0)
+            {
                 temp = ptrs[i];
                 ptrs[i] = ptrs[j];
                 ptrs[j] = temp;
@@ -152,11 +162,15 @@ const Product** Store::ptrSortByName(){
     return ptrs;
 }
 
-const Product** Store::ptrSortByPrice(){
+const Product** Store::ptrSortByPrice()
+{
     const Product *temp;
-    for(int i = 0; i<size-1; i++){
-        for(int j = i+1; j < size ; j++){
-            if(ptrs[i]->getPrice()>ptrs[j]->getPrice()){
+    for(int i = 0; i<size-1; i++)
+    {
+        for(int j = i+1; j < size ; j++)
+        {
+            if(ptrs[i]->getPrice()>ptrs[j]->getPrice())
+            {
                 temp = ptrs[i];
                 ptrs[i] = ptrs[j];
                 ptrs[j] = temp;
@@ -166,18 +180,21 @@ const Product** Store::ptrSortByPrice(){
     return ptrs;
 }
 
-const Product& Store::operator[](int i)const
+Product& Store::operator[](int i)const
 {
     if(i<=size)
         return products[i];
-    else{
+    else
+    {
         cout<<"No element on that position.\n";
         exit(1);
     }
 }
 
-Store& Store::operator=(const Store& other){
-    if(&other != this){
+Store& Store::operator=(const Store& other)
+{
+    if(&other != this)
+    {
         this->~Store();
         size = other.size;
         maxSize = other.maxSize;
@@ -193,8 +210,10 @@ Store& Store::operator=(const Store& other){
     return *this;
 }
 
-Store Store::operator- (int i)const{
-    if(i>size){
+Store Store::operator- (int i)const
+{
+    if(i>size)
+    {
         cout<<"No element on that position.\n";
         exit(1);
     }
@@ -204,7 +223,8 @@ Store Store::operator- (int i)const{
     return result;
 }
 
-Store Store::operator+ (const Product& other)const{
+Store Store::operator+ (const Product& other)const
+{
     if(full())
     {
         cout<<"The store is full\n";
@@ -214,26 +234,30 @@ Store Store::operator+ (const Product& other)const{
     Store result(*this);
 
     result.products[size] = other;
-    result.ptrs[size]  = &products[size];
+    result.ptrs[size]  = &result.products[size];
     result.size++;
 
     return result;
 }
 
-Store Store::operator+ (const Store& other)const{
-     Store result(maxSize + other.maxSize);
+Store Store::operator+ (const Store& other)const
+{
+    Store result(maxSize + other.maxSize);
 
-    if(&other != NULL){
+    if(&other != NULL)
+    {
         result.size = size + other.size;
         int i;
-        for(i = 0; i<size; i++){
+        for(i = 0; i<size; i++)
+        {
             result.products[i] = products[i];
-            ptrs[i] = &result.products[i];
+            result.ptrs[i] = &result.products[i];
         }
 
-        for(int j = 0; j<other.size; j++){
+        for(int j = 0; j<other.size; j++)
+        {
             result.products[i+j] = other.products[j];
-            ptrs[i+j] = &result.products[i+j];
+            result.ptrs[i+j] = &result.products[i+j];
         }
 
         return result;
@@ -245,11 +269,13 @@ Store Store::operator+ (const Store& other)const{
     return result;
 }
 
-bool Store::operator> (Store& other){
+bool Store::operator> (Store& other)
+{
     this->sortByName();
     other.sortByName();
 
-    for(int i = 0; i<min(this->size, other.size); i++){
+    for(int i = 0; i<min(this->size, other.size); i++)
+    {
         if(strcmp(ptrs[i]->getName(), other.ptrs[i]->getName()) > 0)
             return false;
         else if(strcmp(ptrs[i]->getName(), other.ptrs[i]->getName()) < 0)
@@ -259,4 +285,5 @@ bool Store::operator> (Store& other){
     return size < other.size;
 
 }
+
 
