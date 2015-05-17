@@ -1,15 +1,22 @@
 #include<iostream>
 #include<cassert>
+#include<cstdlib>
 using namespace std;
 
 template <typename T>
-struct node{
+struct node
+{
     T inf;
     node<T>* link;
+
+    //node(){}
+
+    node(T what = T()) : inf(what), link(NULL) {}
 };
 
 template <typename T>
-class linkedList{
+class linkedList
+{
 private:
     node<T>* first;
     node<T>* current;
@@ -28,13 +35,12 @@ public:
 //
 //    }
 
-    void addElementAt(const T what, int where){
-        node<T>* temp = new node<T>;
-        temp->inf = what;
+    void addElementAt(const T what, unsigned where)
+    {
+        node<T>* temp = new node<T>(what);
         if(first==NULL)
         {
             first = temp;
-            first->link = NULL;
             size = 1;
         }
         else
@@ -43,8 +49,12 @@ public:
             int i = 0;
             while(i<where-1)
             {
-                if(current->link==NULL) { cout<<"Error";}
-                else { current = current->link; }
+                if(current->link==NULL)
+                {
+                    cout<<"Too big or negative position.\n";
+                    exit(1);
+                }
+                current = current->link;
                 i++;
             }
             temp->link = current->link;
@@ -53,7 +63,7 @@ public:
         }
     }
 
-    T removeFrom(int where)
+    T removeFrom(unsigned where)
     {
         if(where==0)
         {
@@ -70,8 +80,12 @@ public:
             int i = 0;
             while(i<where-1)
             {
-                if(current->link==NULL) { cout<<"Error";}
-                else { current = current->link; }
+                if(current->link==NULL)
+                {
+                    cout<<"Too big or negative position.\n";
+                    exit(1);
+                }
+                current = current->link;
                 i++;
             }
             node<T>* temp = current->link;
@@ -83,12 +97,17 @@ public:
         }
     }
 
-    T elementAt(int where)
+    T elementAt(unsigned where)
     {
         current= first;
         int i=0;
-        while(current!=NULL && i<where)
+        while(i<where)
         {
+            if(current==NULL)
+            {
+                cout<<"Too big or negative position.\n";
+                exit(1);
+            }
             current=current->link;
             i++;
         }
@@ -109,11 +128,12 @@ public:
 int main()
 {
     linkedList<int> l;
+
     l.addElementAt(1,0);
     l.addElementAt(2,1);
     l.addElementAt(3,2);
 
-    cout<<l.removeFrom(1)<<endl<<endl;
+    cout<<l.elementAt(1)<<endl<<endl;
 
     l.print();
     return 0;
