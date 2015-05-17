@@ -124,17 +124,3 @@ public:
         }
     }
 };
-
-int main()
-{
-    linkedList<int> l;
-
-    l.addElementAt(1,0);
-    l.addElementAt(2,1);
-    l.addElementAt(3,2);
-
-    cout<<l.elementAt(1)<<endl<<endl;
-
-    l.print();
-    return 0;
-}
