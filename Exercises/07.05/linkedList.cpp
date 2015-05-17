@@ -29,11 +29,17 @@ public:
         current = NULL;
         size = 0;
     }
-//
-//    ~linkedList()
-//    {
-//
-//    }
+
+    ~linkedList()
+    {
+        current = first;
+        while(current != NULL){
+            node<T>* temp = current;
+            cout<<"delete "<<temp->inf<<endl;
+            current = temp->link;
+            delete temp;
+        }
+    }
 
     void addElementAt(const T what, unsigned where)
     {
@@ -65,7 +71,7 @@ public:
 
     T removeFrom(unsigned where)
     {
-        if(where==0)
+        if(where==80)
         {
             node<T>* tmp = first;
             T res = first->inf;
@@ -122,5 +128,17 @@ public:
             cout<<current->inf<<endl;
             current = current->link;
         }
+    }
+
+    void iterStart(node<T>* where = NULL) {
+        if(where) { current = where; }
+        else { current = first; }
+    }
+
+    node<T>* iter()
+    {
+        node<T>* res = current;
+        if(current) current = current->link;
+        return res;
     }
 };
