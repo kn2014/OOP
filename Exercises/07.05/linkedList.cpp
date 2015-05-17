@@ -9,8 +9,6 @@ struct node
     T inf;
     node<T>* link;
 
-    //node(){}
-
     node(T what = T()) : inf(what), link(NULL) {}
 };
 
