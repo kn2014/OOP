@@ -9,7 +9,8 @@ struct node
     T inf;
     node<T>* link;
 
-    node(T what = T()) : inf(what), link(NULL) {}
+    node() : link(NULL) {}
+    node(T what) : inf(what), link(NULL) {}
 };
 
 template <typename T>
@@ -33,7 +34,7 @@ public:
         current = first;
         while(current != NULL){
             node<T>* temp = current;
-            cout<<"delete "<<temp->inf<<endl;
+//            cout<<"delete "<<temp->inf<<endl;
             current = temp->link;
             delete temp;
         }
