@@ -78,7 +78,7 @@ const char* Person::GetName() const
     return name;
 }
 
-void Person::Print() const
+virtual void Person::Print() const
 {
     std::cout<<"Name:\t"<<name<<std::endl;
     if(gender==1)
