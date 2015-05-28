@@ -2,6 +2,7 @@
 #include "Person.h"
 #include "SoccerPlayer.h"
 #include "TennisPlayer.h"
+#include "DynamicCaster.h"
 
 using namespace std;
 
@@ -17,6 +18,30 @@ int main()
     ptr[2]=&t;
 
     ptr[1]->Print();
+    SoccerPlayer* ps;
+    if(ps=dynamic_cast<SoccerPlayer*>(&s))
+    {
+        ptr[3]= new SoccerPlayer(s);
+    }
+    ptr[3]->Print();
+
+    DynamicCaster dyn;
+
+    dyn.addPerson(&p);
+    dyn.addPerson(&s);
+    dyn.addPerson(&t);
+
+    cout<<"======================================================"<<endl;
+    dyn.print();
+
+    DynamicCaster dyn2(dyn);
+
+    //dyn2 = dyn;
+
+    cout<<"======================================================"<<endl;
+    dyn2.print();
+
+
 
 
     return 0;
