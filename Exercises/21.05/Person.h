@@ -18,7 +18,7 @@ class Person
         void SetName(const char*);
         void SetGender(bool);
 
-        void Print() const;
+        virtual void Print() const;
 
         virtual ~Person();
 
