@@ -1,13 +1,9 @@
 Домашно 5:
 
                   Station
-                  /  |  \
                  /   |   \
-                /    |    \
                /     |     \
-              /      |      \
              /       |       \
-            /        |        \
            /         |         \
       Airport  TrainStation  BusStation
                 /        \
