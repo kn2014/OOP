@@ -1,0 +1,21 @@
+Домашно 5:
+
+                  Station
+                  /  |  \
+                 /   |   \
+                /    |    \
+               /     |     \
+              /      |      \
+             /       |       \
+            /        |        \
+           /         |         \
+      Airport  TrainStation  BusStation
+                /        \
+              /            \
+            /                \
+CargoTrainStaition      PeopleTrainStation
+            \                 /
+              \             /
+            HybridTrainStation
+            
+//недовършено
