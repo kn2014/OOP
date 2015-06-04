@@ -7,7 +7,7 @@ class CargoTrainStation : virtual public TrainStation{
 
 public:
 
-    CargoTrainStation(const char* loc) : TrainStation(loc){
+    CargoTrainStation(const char* loc = NULL) : TrainStation(loc){
         for(int i = 0; i<150; i++){
             load[i] = 0;
         }
