@@ -8,7 +8,7 @@ class PeopleTrainStation : virtual public TrainStation{
 
 public:
 
-    PeopleTrainStation(const char* loc) : TrainStation(loc){
+    PeopleTrainStation(const char* loc = NUL) : TrainStation(loc){
         for(int i = 0; i<150; i++){
             seats[i] = 0;
         }
